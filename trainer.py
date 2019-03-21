@@ -5,6 +5,8 @@ import time
 
 lowerLimit = 36
 upperLimit = 96
+minNoteDur = 0.5
+maxNoteDur = 1.2
 
 intervalsArr = ['m2', 'M2', 'm3', 'M3', 'P4', 'TT', 'P5', 'm6', 'M6', 'm7', 'M7', 'P8']
 
@@ -12,8 +14,9 @@ intervalsArr = ['m2', 'M2', 'm3', 'M3', 'P4', 'TT', 'P5', 'm6', 'M6', 'm7', 'M7'
 print(mido.get_output_names())
 portName = input('type name of desired midi port including single quotes:')
 outPort = mido.open_output(portName)
+quit = False;
 
-while True:
+while not quit:
     #randomly choose intervals and notes
     intervalOne = random.randint(1, 12) * random.choice([-1, 1])
     intervalTwo = random.randint(1, 12) * random.choice([-1, 1])
@@ -34,7 +37,7 @@ while True:
     msgThree = Message('note_on', note=absNoteThree, velocity=127)
 
     #randomly choose note duration
-    noteDur = random.uniform(0.25, 1)
+    noteDur = random.uniform(minNoteDur, maxNoteDur)
 
     #set answer values and variables
 
@@ -46,8 +49,9 @@ while True:
     intervalOneResponse = ''
     intervalTwoResponse = ''
     playNotes = True
+    done = False
 
-    while intervalOneResponse != intervalOneAnswer or intervalTwoResponse != intervalTwoAnswer:
+    while not done:
         if playNotes:
             #play notes
             outPort.send(msgOne)
@@ -63,19 +67,27 @@ while True:
             outPort.send(Message('note_off', note=absNoteThree))
             playNotes = False
 
-        rawAnswer = raw_input('Enter intervals separated by one space or enter r to repeat: ')
+        rawAnswer = raw_input('Enter intervals separated by one space or r to repeat, d for next interval: ')
         if rawAnswer == 'r':
             playNotes = True
+        elif rawAnswer == 'n':
+            done = True
+        elif rawAnswer == 'q':
+            done = True
+            quit = True
         else:
             responses = rawAnswer.split(' ')
-            intervalOneResponse = responses[0]
-            #print(intervalOneResponse)
-            intervalTwoResponse = responses[1]
-            #print(responses)
-            if intervalOneResponse != intervalOneAnswer or intervalTwoResponse != intervalTwoAnswer:
-                print('Incorrect.')
+            if len(responses) != 2:
+                print('Invalid entry.\n')
             else:
-                print('Correct!')
+                intervalOneResponse = responses[0]
+                #print(intervalOneResponse)
+                intervalTwoResponse = responses[1]
+                #print(responses)
+                if intervalOneResponse != intervalOneAnswer or intervalTwoResponse != intervalTwoAnswer:
+                    print('Incorrect.')
+                else:
+                    print('Correct!')
 
 #        print([intervalOne, intervalTwo])
 #        print([relNoteOne, relNoteTwo, relNoteThree])
