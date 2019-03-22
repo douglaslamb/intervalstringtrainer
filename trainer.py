@@ -67,7 +67,7 @@ while not quit:
             outPort.send(Message('note_off', note=absNoteThree))
             playNotes = False
 
-        rawAnswer = raw_input('Enter intervals separated by one space or r to repeat, d for next interval: ')
+        rawAnswer = raw_input('Enter intervals separated by one space. r - repeat, n - next string, q - quit: ')
         if rawAnswer == 'r':
             playNotes = True
         elif rawAnswer == 'n':
