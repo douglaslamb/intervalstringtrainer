@@ -3,7 +3,7 @@ from mido import Message
 import random
 import time
 import stringTrainer
-##import chordTrainer
+import chordTrainer
 
 # globals
 lowerMidiLimit = 36
@@ -38,8 +38,7 @@ while trainer == None:
     if activityNumber == `1`:
         trainer = stringTrainer.StringTrainer()
     elif activityNumber == `2`:
-        #trainer = chordTrainer.chordTrainer
-        print('nothing here yet')
+        trainer = chordTrainer.ChordTrainer()
     else:
         print('Invalid entry.')
 
