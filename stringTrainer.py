@@ -3,7 +3,6 @@ from mido import Message
 import random
 import time
 
-
 class StringTrainer:
 
     def __init__(self):
@@ -29,7 +28,6 @@ class StringTrainer:
         highest = max([relNoteOne, relNoteTwo, relNoteThree])
         noteRange = highest - lowest
         lowNote = random.randint(lowerMidiLimit, upperMidiLimit - noteRange)
-        # check this line below, not sure if lowest * -1 is necessary
         self.absNoteOne = lowNote + (lowest * -1)
         self.absNoteTwo = self.absNoteOne + intervalOne
         self.absNoteThree = self.absNoteTwo + intervalTwo
@@ -41,11 +39,6 @@ class StringTrainer:
 
         self.intervalOneAnswer = self.intervalsArr[abs(intervalOne) - 1]
         self.intervalTwoAnswer = self.intervalsArr[abs(intervalTwo) - 1]
-        #print(intervalOneAnswer)
-        #print(intervalTwoAnswer)
-
-    #playNotes = True
-    #done = False
 
     def playNotes(self, port):
         #create messages
@@ -71,14 +64,8 @@ class StringTrainer:
             print('Invalid entry.')
         else:
             intervalOneResponse = responses[0]
-            #print(intervalOneResponse)
             intervalTwoResponse = responses[1]
-            #print(responses)
             if intervalOneResponse != self.intervalOneAnswer or intervalTwoResponse != self.intervalTwoAnswer:
                 print('Incorrect.')
             else:
                 print('Correct!')
-
-#        print([intervalOne, intervalTwo])
-#        print([relNoteOne, relNoteTwo, relNoteThree])
-#        print([absNoteOne, absNoteTwo, absNoteThree])
