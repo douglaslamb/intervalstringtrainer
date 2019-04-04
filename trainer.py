@@ -8,7 +8,6 @@ import stringTrainer
 # globals
 lowerMidiLimit = 36
 upperMidiLimit = 96
-intervalsArr = ['m2', 'M2', 'm3', 'M3', 'P4', 'TT', 'P5', 'm6', 'M6', 'm7', 'M7', 'P8']
 outPort = None
 
 # prompt to choose midi port
@@ -70,7 +69,3 @@ while not quit:
         else:
             responses = rawAnswer.split(' ')
             trainer.checkAnswer(responses)
-
-#        print([intervalOne, intervalTwo])
-#        print([relNoteOne, relNoteTwo, relNoteThree])
-#        print([absNoteOne, absNoteTwo, absNoteThree])
