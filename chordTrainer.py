@@ -11,7 +11,8 @@ class ChordTrainer:
         self.minDur = 0.5
         self.maxDur = 1.2
         self.noteDur = None
-        self.chordNotes = None
+        self.currChord = None
+        self.currLowNote = None
         self.correctAnswer = None
         self.chordsArr = [] 
         self.promptText = "Enter chord."
@@ -30,27 +31,17 @@ class ChordTrainer:
                 self.chordsArr.append((answerString, chord))
 
     def chooseNotes(self, lowerMidiLimit, upperMidiLimit):
-        #randomly choose intervals and notes
-        intervalOne = random.randint(1, 12) * random.choice([-1, 1])
-        intervalTwo = random.randint(1, 12) * random.choice([-1, 1])
-        relNoteOne = 0
-        relNoteTwo = relNoteOne + intervalOne
-        relNoteThree = relNoteTwo + intervalTwo
-        lowest = min([relNoteOne, relNoteTwo, relNoteThree])
-        highest = max([relNoteOne, relNoteTwo, relNoteThree])
-        noteRange = highest - lowest
-        lowNote = random.randint(lowerMidiLimit, upperMidiLimit - noteRange)
-        self.absNoteOne = lowNote + (lowest * -1)
-        self.absNoteTwo = self.absNoteOne + intervalOne
-        self.absNoteThree = self.absNoteTwo + intervalTwo
+        # randomly choose and save a chord from the arr
+        self.currChord = random.choice(self.chordsArr)
+        chordIntervals = self.currChord[1]
+        # get the range
+        intervalRange = 0
+        for interval in chordIntervals:
+            intervalRange += interval
 
-        #randomly choose note duration
-        self.noteDur = random.uniform(self.minNoteDur, self.maxNoteDur)
-
-        #set answer values
-
-        self.intervalOneAnswer = self.intervalsArr[abs(intervalOne) - 1]
-        self.intervalTwoAnswer = self.intervalsArr[abs(intervalTwo) - 1]
+        # randomly choose and save a low note
+        self.currLowNote = random.randint(lowerMidiLimit, upperMidiLimit - intervalRange)
+        self.chordNotes[0] = lowNote
 
     def playNotes(self, port):
         #create messages
