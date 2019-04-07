@@ -66,12 +66,12 @@ class ChordTrainer:
             port.send(Message('note_off', note=midiNote))
 
     def checkAnswer(self, responses):
-        if len(responses) != 2:
+        if len(responses) != 1:
             print('Invalid entry.')
         else:
-            intervalOneResponse = responses[0]
-            intervalTwoResponse = responses[1]
-            if intervalOneResponse != self.intervalOneAnswer or intervalTwoResponse != self.intervalTwoAnswer:
+            response = responses[0]
+            correctAnswer = self.currChord[0]
+            if response != correctAnswer:
                 print('Incorrect.')
             else:
                 print('Correct!')
