@@ -8,9 +8,9 @@ import os
 class ChordTrainer:
 
     def __init__(self):
-        self.minDur = 0.5
-        self.maxDur = 1.2
-        self.noteDur = None
+        self.minDur = 1 
+        self.maxDur = 3 
+        self.dur = None
         self.currChord = None
         self.currLowNote = None
         self.correctAnswer = None
@@ -39,9 +39,11 @@ class ChordTrainer:
         for interval in chordIntervals:
             intervalRange += interval
 
-        # randomly choose and save a low note
+        # randomly choose and save the low note
         self.currLowNote = random.randint(lowerMidiLimit, upperMidiLimit - intervalRange)
-        self.chordNotes[0] = lowNote
+
+        # randomly choose duration
+        self.dur = random.uniform(self.minDur, self.maxDur)
 
     def playNotes(self, port):
         #create messages
