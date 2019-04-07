@@ -46,23 +46,24 @@ class ChordTrainer:
         self.dur = random.uniform(self.minDur, self.maxDur)
 
     def playNotes(self, port):
-        #create messages
-        msgOne = Message('note_on', note=self.absNoteOne, velocity=127)
-        msgTwo = Message('note_on', note=self.absNoteTwo, velocity=127)
-        msgThree = Message('note_on', note=self.absNoteThree, velocity=127)
+        # generate midi note values
+        midiNotes = [self.currLowNote]
+        chordIntervals = self.currChord[1]
+        for i, interval in enumerate(chordIntervals):
+            newNote = midiNotes[i] + interval
+            midiNotes.append(newNote)
 
-        #play notes
-        port.send(msgOne)
-        time.sleep(self.noteDur)
-        port.send(Message('note_off', note=self.absNoteOne))
+        print(midiNotes)
 
-        port.send(msgTwo)
-        time.sleep(self.noteDur)
-        port.send(Message('note_off', note=self.absNoteTwo))
+        # play notes
+        for midiNote in midiNotes:
+            port.send(Message('note_on', note=midiNote, velocity=127))
 
-        port.send(msgThree)
-        time.sleep(self.noteDur)
-        port.send(Message('note_off', note=self.absNoteThree))
+        time.sleep(self.dur)
+
+        # end notes
+        for midiNote in midiNotes:
+            port.send(Message('note_off', note=midiNote))
 
     def checkAnswer(self, responses):
         if len(responses) != 2:
