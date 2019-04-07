@@ -55,7 +55,7 @@ while not quit:
             trainer.playNotes(outPort)
             playNotes = False
 
-        rawAnswer = raw_input(trainer.promptText + ' blank - repeat, n - next string, q - quit: ')
+        rawAnswer = raw_input(trainer.promptText + ' blank - repeat, n - next question, q - quit: ')
 
         # check answers
         if rawAnswer == '':
