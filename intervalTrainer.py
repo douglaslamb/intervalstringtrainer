@@ -2,6 +2,8 @@ import mido
 from mido import Message
 import random
 import time
+import csv
+import os
 
 class IntervalTrainer:
 
@@ -23,21 +25,21 @@ class IntervalTrainer:
         # the first and only row must be comma separated interval strings (e.g., P5) with no whitespace
         with open(intervalsFile) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
-            self.userIntervals = csv_reader[0]
+            self.userIntervals = csv_reader.next()
 
-        print(userIntervals)
+        #print(self.userIntervals)
 
-        upDownHarmonicResponses = []
-        upDownHarmonicResponses[0] = raw_input('Intervals played up? y/n:')
-        upDownHarmonicResponses[1] = raw_input('Intervals played down? y/n:')
-        upDownHarmonicResponses[2] = raw_input('Intervals played harmonically? y/n:')
+        upDownHarmonicResponses = [''] * 3
+        upDownHarmonicResponses[0] = raw_input('Intervals played up? y/n\n')
+        upDownHarmonicResponses[1] = raw_input('Intervals played down? y/n\n')
+        upDownHarmonicResponses[2] = raw_input('Intervals played harmonically? y/n\n')
 
         for i, item in enumerate(upDownHarmonicResponses):
             if item == 'y':
                 self.isUpDownHarmonic[i] = True
 
-        print(upDownHarmonicResponses)
-        print(isUpDownHarmonic)
+        #print(upDownHarmonicResponses)
+        #print(self.isUpDownHarmonic)
 
     def chooseNotes(self, lowerMidiLimit, upperMidiLimit):
         #randomly choose intervals and notes

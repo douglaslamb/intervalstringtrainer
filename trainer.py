@@ -4,6 +4,7 @@ import random
 import time
 import stringTrainer
 import chordTrainer
+import intervalTrainer
 
 # globals
 lowerMidiLimit = 36
@@ -32,13 +33,15 @@ trainer = None
 
 # Start Menu
 while trainer == None:
-    activityNumber = raw_input('Choose activity:\n1. Interval String Identification\n2. Chord Identification\n')
+    activityNumber = raw_input('Choose activity:\n1. Interval String Identification\n2. Chord Identification\n3. Interval Identification\n')
 
     # assign program module depending on user input
     if activityNumber == `1`:
         trainer = stringTrainer.StringTrainer()
     elif activityNumber == `2`:
         trainer = chordTrainer.ChordTrainer()
+    elif activityNumber == `3`:
+        trainer = intervalTrainer.IntervalTrainer()
     else:
         print('Invalid entry.')
 
