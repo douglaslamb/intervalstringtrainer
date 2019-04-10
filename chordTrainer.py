@@ -53,8 +53,6 @@ class ChordTrainer:
             newNote = midiNotes[i] + interval
             midiNotes.append(newNote)
 
-        print(midiNotes)
-
         # play notes
         for midiNote in midiNotes:
             port.send(Message('note_on', note=midiNote, velocity=127))
