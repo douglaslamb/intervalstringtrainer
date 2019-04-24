@@ -1,0 +1,39 @@
+Instructions for Windows Installation
+
+Summary
+1. Install Python 2.7.16 (it must be this version!)
+2. Install Python packages
+3. Install and configure loopmidi so that the eartrainer can send midi to freepiano or your DAW
+4. Install and configure freepiano (or use a DAW you have)
+5. Run the eartrainer
+
+1. Install Python 2.7.16 (it must be this version!)
+A. Install Python https://www.python.org/ftp/python/2.7.16/python-2.7.16.amd64.msi
+B. Put Python in your PATH. Go to System Properties and follow these instructions https://geek-university.com/python/add-python-to-the-windows-path/ . The path you are going to add is ;C:\Python27 (not ;C:\Python34, like this tutorial says).
+
+2. Install Python packages
+A. Click the download link and install this C++ compiler for Python 2.7 https://www.microsoft.com/en-us/download/details.aspx?id=44266
+B. Open the Command Prompt program
+C. Enter "python -m pip install --upgrade pip" (without quotes) and press enter
+D. Enter "python -m pip install mido" and press enter
+E. Enter "python -m pip install python-rtmidi" and press enter
+
+3. Install and configure loopmidi
+A. Download and install loopmidi https://www.tobias-erichsen.de/software/loopmidi.html
+B. Open loopmidi
+C. In the "New port-name" field in loopmidi type eartrainerport
+D. Press the plus button in the lower left to create the midi port
+
+4. Install configure freepiano
+A. Download and install freepiano https://sourceforge.net/projects/freepiano/files/ click the green link
+B. Open freepiano
+C. In freepiano click the wrench icon in the upper right.
+D. Under the devices tab, at the bottom, under MIDI input, you should see eartrainerport. Click that and set it to "Map to inputs".
+E. Leave freepiano running
+
+5. Run the eartrainer
+A. Open the Command Prompt program
+B. Navigate to the clieartrainer folder using cd (which stands for "change directory"). If clieartrainer was in C:\ you would type "cd C:\clieartrainer" and press enter.
+C. type "python trainer.py"
+
+Hopefully it works. You then enter a number corresponding to the eartrainerport. Then you choose an activity. If you choose chord identification you need to specify a chord csv file. enter "sevenths.csv" and hit enter. You can copy and modify that file to use different sets of chords. If you choose interval identification you need to specify an interval csv file. enter "allints.csv" and hit enter. You can copy and modify that file to use different sets of intervals.
