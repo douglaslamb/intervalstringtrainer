@@ -1,6 +1,6 @@
 clieartrainer
 
-The program plays you an interval, an interval string, or a chord and you type in what was played.
+The program plays you an interval, an interval string, or a chord and you type in what was played. This program does not make sound itself. It sends midi notes to another program or instrument which makes sound.
 
 For intervals, we use these answers:
 m2 M2 m3 M3 P4 TT P5 m6 M6 m7 M7 P8
@@ -8,6 +8,7 @@ m2 M2 m3 M3 P4 TT P5 m6 M6 m7 M7 P8
 For chords, we use these answers:
 M M6 M64 m m6 m64 o6 + Mm7 M7 m7 o/7 o7 Mm65 M65 m65 o/65 and so on.
 NB: o/7 is half diminished
+
 The user may specify any type of chord when using this program.
 
 Instructions for Windows Installation
@@ -76,9 +77,9 @@ A. In the clieartrainer folder, double-click the clieartrainer file.
 Hopefully it works. You then enter a number corresponding to the eartrainerport. Then you choose an activity. If you choose chord identification you need to specify a chord csv file which contains the chords you wish to be tested on. If you choose interval identification you need to specify an interval csv file. The program comes with two csv files, sevenths.csv, which contains all the seventh chords in all inversions and allints.csv which includes all intervals an octave or smaller.
 
 On Mac:
-You must specify the full path of the csv file. For example, if you are doing chord identification and if you unzipped the 	clieartrainer folder into Downloads, you would enter ~/Downloads/clieartrainer/sevenths.csv.
+You must specify the full path of the csv file. For example, if you are doing chord identification and if you unzipped the clieartrainer folder into Downloads, you would enter ~/Downloads/clieartrainer/sevenths.csv.
 
 On Windows:
-	You need not specify the full path of the csv file. For example, if you are doing chord identification you would enter sevenths.csv without quotes.
+You need not specify the full path of the csv file. For example, if you are doing chord identification you would enter sevenths.csv .
 
-You can copy and modify these file to use different sets of chords and intervals. The allints.csv is just a one-line list of comma-separated intervals which you may remove intervals from. The sevenths.csv is a comma-separated list of chords. Each line starts with the user-provided answer string (which can be anything) for a chord, and is followed by a list of the intervals (in semitones) which make up that chord. For example, the entry for a major chord would be "M,4,3" without quotes. You should make copies of these files if you modify them, so that you can always go back to the original files if your modifications cause the program to stop working.
+You can copy and modify these file to use different sets of chords and intervals. The allints.csv is just a one-line list of comma-separated intervals which you may remove intervals from. The sevenths.csv is a comma-separated list of chords. Each line in sevenths.csv starts with the user-provided answer string (which can be anything) for a chord, and is followed by a list of the intervals (in semitones) which make up that chord. For example, the entry for a major chord would be "M,4,3" without quotes. You should make copies of these files if you modify them, so that you can always go back to the original files if your modifications cause the program to stop working.
