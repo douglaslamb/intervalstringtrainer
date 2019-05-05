@@ -1,3 +1,15 @@
+clieartrainer
+
+The program plays you an interval, an interval string, or a chord and you type in what was played.
+
+For intervals, we use these answers:
+m2 M2 m3 M3 P4 TT P5 m6 M6 m7 M7 P8
+
+For chords, we use these answers:
+M M6 M64 m m6 m64 o6 + Mm7 M7 m7 o/7 o7 Mm65 M65 m65 o/65 and so on.
+NB: o/7 is half diminished
+The user may specify any type of chord when using this program.
+
 Instructions for Windows Installation
 
 Summary
@@ -21,19 +33,52 @@ E. Enter "python -m pip install python-rtmidi" and press enter
 3. Install and configure loopmidi
 A. Download and install loopmidi https://www.tobias-erichsen.de/software/loopmidi.html
 B. Open loopmidi
-C. In the "New port-name" field in loopmidi type eartrainerport
+C. In the "New port-name" field in loopmidi type "eartrainerport".
 D. Press the plus button in the lower left to create the midi port
 
-4. Install configure freepiano
+4. Install and configure freepiano
 A. Download and install freepiano https://sourceforge.net/projects/freepiano/files/ click the green link
 B. Open freepiano
-C. In freepiano click the wrench icon in the upper right.
+C. In freepiano, click the wrench icon in the upper right.
 D. Under the devices tab, at the bottom, under MIDI input, you should see eartrainerport. Click that and set it to "Map to inputs".
-E. Leave freepiano running
+E. Leave freepiano running.
 
 5. Run the eartrainer
 A. Open the Command Prompt program
 B. Navigate to the clieartrainer folder using cd (which stands for "change directory"). If clieartrainer was in C:\ you would type "cd C:\clieartrainer" and press enter.
 C. type "python trainer.py"
 
-Hopefully it works. You then enter a number corresponding to the eartrainerport. Then you choose an activity. If you choose chord identification you need to specify a chord csv file. enter "sevenths.csv" and hit enter. You can copy and modify that file to use different sets of chords. If you choose interval identification you need to specify an interval csv file. enter "allints.csv" and hit enter. You can copy and modify that file to use different sets of intervals.
+Instructions for Mac Installation
+*You must have a DAW (e.g., GarageBand, which is installed on Macs by default).
+*These instructions assume some familiarity with DAWs
+
+Summary
+1. Unzip clieartrainer-mac.zip
+2. Create a midi bus so that clieartrainer can send midinotes to your DAW (e.g., GarageBand)
+3. Configure your DAW
+4. Run the eartrainer
+
+1. Unzip clieartrainer-mac.zip
+A. Unzip clieartrainer-mac.zip. You will now have a clieartrainer folder.
+
+2. Create a midi bus so that clieartrainer can send midinotes to your DAW (e.g., GarageBand)
+A. Use these instructions to add a midi port called eartrainerport . 
+
+3. Configure your DAW (these instructions are for GarageBand)
+A. Open GarageBand
+B. Create a piano software instrument track https://youtu.be/B73_TZB-aLE
+C. Click that track's Record Enable button so that it turns red. You may have to unhide the Record Enable button first http://www.peachpit.com/articles/article.aspx?p=2255109&seqNum=4 
+D. Leave GarageBand running
+
+5. Run the eartrainer
+A. In the clieartrainer folder, double-click the clieartrainer file.
+
+Hopefully it works. You then enter a number corresponding to the eartrainerport. Then you choose an activity. If you choose chord identification you need to specify a chord csv file which contains the chords you wish to be tested on. If you choose interval identification you need to specify an interval csv file. The program comes with two csv files, sevenths.csv, which contains all the seventh chords in all inversions and allints.csv which includes all intervals an octave or smaller.
+
+On Mac:
+You must specify the full path of the csv file. For example, if you are doing chord identification and if you unzipped the 	clieartrainer folder into Downloads, you would enter ~/Downloads/clieartrainer/sevenths.csv.
+
+On Windows:
+	You need not specify the full path of the csv file. For example, if you are doing chord identification you would enter sevenths.csv without quotes.
+
+You can copy and modify these file to use different sets of chords and intervals. The allints.csv is just a one-line list of comma-separated intervals which you may remove intervals from. The sevenths.csv is a comma-separated list of chords. Each line starts with the user-provided answer string (which can be anything) for a chord, and is followed by a list of the intervals (in semitones) which make up that chord. For example, the entry for a major chord would be "M,4,3" without quotes. You should make copies of these files if you modify them, so that you can always go back to the original files if your modifications cause the program to stop working.
