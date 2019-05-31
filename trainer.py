@@ -46,6 +46,29 @@ while outPort == None:
     outPort = mido.open_output(midiPorts[portSelection - 1])
     print('Using ' + outPort.name + ' for midi output.\n')
 
+# prompt to choose lower and upper midi maxes
+# default is 36 and 96
+# lower
+try:
+    lowerMidiLimitInput = int(raw_input('Set lower and upper Midi note limit. Default is ' + str(lowerMidiLimit) + '\n'))
+except:
+    pass
+else:
+    if lowerMidiLimitInput >= 21 and lowerMidiLimitInput <= 108:
+        lowerMidiLimit = lowerMidiLimitInput
+print('Lower Midi note limit is ' + str(lowerMidiLimit))
+
+# upper
+try:
+    upperMidiLimitInput = int(raw_input('Set upper Midi note limit. Default is ' + str(upperMidiLimit) + '\n'))
+except:
+    pass
+else:
+    if upperMidiLimitInput > lowerMidiLimit and upperMidiLimitInput <= 108:
+        upperMidiLimit = upperMidiLimitInput
+print('Upper Midi note limit is ' + str(upperMidiLimit))
+
+
 quit = False
 trainer = None
 
