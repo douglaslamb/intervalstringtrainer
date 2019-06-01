@@ -1,4 +1,4 @@
-# CLI Ear Trainer - an ear training program for the command line
+# kissear - an ear training program for the command line
 # Copyright (C) 2019 Douglas Lamb 
 # douglaslamb@douglaslamb.com
 

@@ -1,4 +1,4 @@
-clieartrainer
+kissear
 
 The program plays you an interval, an interval string, or a chord and you type in what was played. This program does not make sound itself. It sends midi notes to another program or instrument which makes sound.
 
@@ -13,86 +13,6 @@ The user may specify any set of chords to use with this program.
 
 If this program does not work, read the instructions again, and make sure you are doing everything correctly. After doing that you can ask the author for help, but he may not have time. If you want help, the best thing to do is to bring your computer to the author while at school or whatever.
 
-
-Instructions for Windows Installation
-
-Summary
-1. Install Python 2.7.16 (it must be this version!)
-2. Install Python packages
-3. Install and configure loopmidi so that the clieartrainer can send midi to freepiano or your DAW
-4. Install and configure freepiano (or use a DAW you have)
-5. Run the clieartrainer
-
-1. Install Python 2.7.16 (it must be this version!)
-A. Install Python https://www.python.org/ftp/python/2.7.16/python-2.7.16.amd64.msi
-B. Put Python in your PATH. Go to System Properties and follow these instructions https://geek-university.com/python/add-python-to-the-windows-path/ . The path you are going to add is ;C:\Python27 (not ;C:\Python34, like this tutorial says).
-
-2. Install Python packages
-A. Click the download link and install this C++ compiler for Python 2.7 https://www.microsoft.com/en-us/download/details.aspx?id=44266
-B. Open the Command Prompt program
-C. Enter "python -m pip install --upgrade pip" (without quotes) and press enter
-D. Enter "python -m pip install mido" and press enter
-E. Enter "python -m pip install python-rtmidi" and press enter
-
-3. Install and configure loopmidi
-A. Download and install loopmidi https://www.tobias-erichsen.de/software/loopmidi.html
-B. Open loopmidi
-C. In the "New port-name" field in loopmidi type "clieartrainerport".
-D. Press the plus button in the lower left to create the midi port
-
-4. Install and configure freepiano
-A. Download and install freepiano https://sourceforge.net/projects/freepiano/files/ click the green link
-B. Open freepiano
-C. In freepiano, click the wrench icon in the upper right.
-D. Under the devices tab, at the bottom, under MIDI input, you should see clieartrainerport. Click that and set it to "Map to inputs".
-E. Leave freepiano running.
-
-5. Run the clieartrainer
-A. Open the Command Prompt program
-B. Navigate to the clieartrainer folder using cd (which stands for "change directory"). If clieartrainer was in C:\ you would type "cd C:\clieartrainer" and press enter.
-C. type "python trainer.py"
-
-
-Instructions for Mac Installation
-*You must have a DAW (e.g., GarageBand, which is installed on Macs by default).
-*These instructions assume some familiarity with DAWs
-
-Summary
-1. Unzip clieartrainer-mac.zip
-2. Create a midi bus so that clieartrainer can send midi notes to your DAW (e.g., GarageBand)
-3. Configure your DAW
-4. Run the clieartrainer
-
-1. Unzip clieartrainer-mac.zip
-A. Unzip clieartrainer-mac.zip. You will now have a clieartrainer folder.
-
-2. Create a midi bus so that clieartrainer can send midinotes to your DAW (e.g., GarageBand)
-A. Use these instructions to add a midi port called clieartrainerport https://help.ableton.com/hc/en-us/articles/209774225-How-to-setup-a-virtual-MIDI-bus . 
-
-3. Configure your DAW (these instructions are for GarageBand)
-A. Open GarageBand
-B. Create a piano software instrument track https://youtu.be/B73_TZB-aLE
-C. Click that track's Record Enable button so that it turns red. You may have to unhide the Record Enable button first http://www.peachpit.com/articles/article.aspx?p=2255109&seqNum=4 
-D. Leave GarageBand running
-
-5. Run the clieartrainer
-A. In the clieartrainer folder, double-click the file named clieartrainer
-
-
-Instructions for Linux Installation
-
-If you are using Linux I will assume a significant amount of technical knowledge. Basically, you need Python 2.7 and the Python packages mido and python-rtmidi. You need to setup a midi bus so that clieartrainer can communicate with your DAW and you need to set up your DAW to receive and play midi (press the Record Enable button on the instrument). Then you cd to the directory you unzipped and run "python trainer.py" in the console.
-
-How to use:
-
-Hopefully it works.
-
-You first enter a number corresponding to the clieartrainerport. Then you choose an activity. If you choose chord identification you need to specify a chord csv file which contains the chords you wish to be tested on. If you choose interval identification you need to specify an interval csv file. The program comes with two csv files, sevenths.csv, which contains all the seventh chords in all inversions and allints.csv which includes all intervals an octave or smaller.
-
-On Mac:
-You must specify the full path of the csv file. For example, if you are doing chord identification and if you unzipped the clieartrainer folder into Downloads, you would enter ~/Downloads/clieartrainer/sevenths.csv 
-
-On Windows or Linux:
-You need not specify the full path of the csv file. For example, if you are doing chord identification you would enter sevenths.csv 
+You first enter a number corresponding to the midi bus to your daw or sound making program. Then you choose an activity. If you choose chord identification you need to specify a chord csv file which contains the chords you wish to be tested on. If you choose interval identification you need to specify an interval csv file. The program comes with two csv files, sevenths.csv, which contains all the seventh chords in all inversions and allints.csv which includes all intervals an octave or smaller.
 
 You can copy and modify these csv file to use different sets of chords and intervals. The allints.csv is just a one-line list of comma-separated intervals which you may remove intervals from. The sevenths.csv is a comma-separated list of chords. Each line in sevenths.csv starts with the answer string (e.g., Mm7, but it could be anything; if you prefer "MajMin7" you could write that instead) for a chord, and is followed by a list of the intervals (in semitones) which make up that chord. For example, the entry for a major chord would be "M,4,3" without quotes. You should make copies of these files if you modify them, so that you can always go back to the original files if your modifications cause the program to stop working.
