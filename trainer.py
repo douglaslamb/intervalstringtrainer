@@ -25,6 +25,7 @@ import chordTrainer
 import intervalTrainer
 
 # globals
+# default midi limits
 lowerMidiLimit = 36
 upperMidiLimit = 96
 outPort = None
@@ -46,28 +47,31 @@ while outPort == None:
     outPort = mido.open_output(midiPorts[portSelection - 1])
     print('Using ' + outPort.name + ' for midi output.\n')
 
-# prompt to choose lower and upper midi maxes
-# default is 36 and 96
-# lower
-try:
-    lowerMidiLimitInput = int(raw_input('Set lower and upper Midi note limit. Default is ' + str(lowerMidiLimit) + '\n'))
-except:
-    pass
-else:
-    if lowerMidiLimitInput >= 21 and lowerMidiLimitInput <= 108:
-        lowerMidiLimit = lowerMidiLimitInput
-print('Lower Midi note limit is ' + str(lowerMidiLimit))
+# prompt to choose midi range
+midiLimitsInputRaw = raw_input('Set midi note range. Enter both limits (inclusive) as integers, separated by a space. Must have at least two-octave range.\nDefault: ' + str(lowerMidiLimit) + ' ' + str(upperMidiLimit) + '\n')
+midiLimitsInput = midiLimitsInputRaw.split(' ')
+necMidiRange = 24
+midiSpecMin = 21
+midiSpecMax = 108
 
-# upper
-try:
-    upperMidiLimitInput = int(raw_input('Set upper Midi note limit. Default is ' + str(upperMidiLimit) + '\n'))
-except:
-    pass
+if len(midiLimitsInput) == 2:
+    # check if input strings are integers
+    try:
+        lowerMidiLimitInput = int(midiLimitsInput[0])
+        upperMidiLimitInput = int(midiLimitsInput[1])
+    except ValueError:
+        print('Invalid input.')
+    else:
+        # check if input integers are appropriate midi notes
+        if lowerMidiLimitInput >= midiSpecMin and lowerMidiLimitInput <= midiSpecMax and upperMidiLimitInput >= midiSpecMin and upperMidiLimitInput <= midiSpecMax and upperMidiLimitInput - lowerMidiLimitInput >= necMidiRange:
+            lowerMidiLimit = lowerMidiLimitInput
+            upperMidiLimit = upperMidiLimitInput
+        else:
+            print('Invalid input.')
 else:
-    if upperMidiLimitInput > lowerMidiLimit and upperMidiLimitInput <= 108:
-        upperMidiLimit = upperMidiLimitInput
-print('Upper Midi note limit is ' + str(upperMidiLimit))
+    print('Invalid input.')
 
+print('Midi range is ' + str(lowerMidiLimit) + ' - ' + str(upperMidiLimit) + '.\n')
 
 quit = False
 trainer = None
