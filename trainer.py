@@ -16,7 +16,6 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # 
 import mido
-import mido.backends.rtmidi
 from mido import Message
 import random
 import time
