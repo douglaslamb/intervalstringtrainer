@@ -4,6 +4,7 @@ import random
 import time
 import csv
 import os
+import kissearutil
 
 class IntervalTrainer:
 
@@ -11,7 +12,6 @@ class IntervalTrainer:
         self.minDur = 0.5
         self.maxDur = 1.2
         self.dur = None
-        self.intervalsArr = ['m2', 'M2', 'm3', 'M3', 'P4', 'TT', 'P5', 'm6', 'M6', 'm7', 'M7', 'P8']
         self.promptText = "Enter interval."
 
         self.userMidiIntervals = []
@@ -29,8 +29,7 @@ class IntervalTrainer:
             csv_reader = csv.reader(csv_file, delimiter=',')
             userIntervalStrings = csv_reader.next()
             for item in userIntervalStrings:
-                midiInterval = self.intervalsArr.index(item) + 1
-                self.userMidiIntervals.append(midiInterval)
+                self.userMidiIntervals.append(kissearutil.diatonicToMidi(item))
 
         #print(self.userMidiIntervals)
 
@@ -100,7 +99,7 @@ class IntervalTrainer:
             print('Invalid entry.')
         else:
             response = responses[0]
-            if response != self.intervalsArr[self.currMidiInterval - 1]:
+            if response != kissearutil.midiToDiatonic(self.currMidiInterval):
                 print('Incorrect.')
             else:
                 print('Correct!')
