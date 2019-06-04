@@ -2,6 +2,7 @@ import mido
 from mido import Message
 import random
 import time
+import kissearutil
 
 class StringTrainer:
 
@@ -14,7 +15,6 @@ class StringTrainer:
         self.absNoteThree = None
         self.intervalOneAnswer = None
         self.intervalTwoAnswer = None
-        self.intervalsArr = ['m2', 'M2', 'm3', 'M3', 'P4', 'TT', 'P5', 'm6', 'M6', 'm7', 'M7', 'P8']
         self.promptText = "Enter intervals separated by one space."
 
     def chooseNotes(self, lowerMidiLimit, upperMidiLimit):
@@ -36,9 +36,8 @@ class StringTrainer:
         self.noteDur = random.uniform(self.minNoteDur, self.maxNoteDur)
 
         #set answer values
-
-        self.intervalOneAnswer = self.intervalsArr[abs(intervalOne) - 1]
-        self.intervalTwoAnswer = self.intervalsArr[abs(intervalTwo) - 1]
+        self.intervalOneAnswer = kissearutil.midiToDiatonic(abs(intervalOne))
+        self.intervalTwoAnswer = kissearutil.midiToDiatonic(abs(intervalTwo))
 
     def playNotes(self, port):
         #create messages
