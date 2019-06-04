@@ -5,7 +5,7 @@ import time
 import csv
 import os
 
-class ChordTrainer:
+class ChordPlayer:
 
     def __init__(self):
         self.minDur = 1 

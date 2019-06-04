@@ -6,7 +6,7 @@ import csv
 import os
 import kissearutil
 
-class IntervalTrainer:
+class IntervalPlayer:
 
     def __init__(self):
         self.minDur = 0.5
