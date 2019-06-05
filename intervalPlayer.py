@@ -8,7 +8,10 @@ import kissearutil
 
 class IntervalPlayer:
 
-    def __init__(self):
+    def __init__(self, lowerMidiLimit, upperMidiLimit, outPort):
+        self.lowerMidiLimit = lowerMidiLimit
+        self.upperMidiLimit = upperMidiLimit
+        self.outPort = outPort
         self.minDur = 0.5
         self.maxDur = 1.2
         self.dur = None
@@ -44,19 +47,22 @@ class IntervalPlayer:
         if isPlayHarmonic == 'y':
             self.playFuncs.append(self.playHarmonic)
 
-    def chooseNotes(self, lowerMidiLimit, upperMidiLimit):
+    def chooseNotes(self):
         # randomly choose an interval and playfunc
         self.currMidiInterval = random.choice(self.userMidiIntervals)
         self.currPlayFunc = random.choice(self.playFuncs)
 
         # randomly choose the low note
-        self.currLowNote = random.randint(lowerMidiLimit, upperMidiLimit - self.currMidiInterval)
+        self.currLowNote = random.randint(self.lowerMidiLimit, self.upperMidiLimit - self.currMidiInterval)
 
         # randomly choose duration
         self.dur = random.uniform(self.minDur, self.maxDur)
 
-    def playNotes(self, port):
-        self.currPlayFunc(self.currLowNote, self.currMidiInterval, port)
+        # return answer string in arr
+        return [kissearutil.midiToDiatonic(abs(self.currMidiInterval))]
+
+    def playNotes(self):
+        self.currPlayFunc(self.currLowNote, self.currMidiInterval, self.outPort)
 
     def playUp(self, lowNote, interval, port):
         highNote = lowNote + interval
@@ -93,13 +99,3 @@ class IntervalPlayer:
         # end notes
         port.send(Message('note_off', note=lowNote))
         port.send(Message('note_off', note=highNote))
-
-    def checkAnswer(self, responses):
-        if len(responses) != 1:
-            print('Invalid entry.')
-        else:
-            response = responses[0]
-            if response != kissearutil.midiToDiatonic(self.currMidiInterval):
-                print('Incorrect.')
-            else:
-                print('Correct!')
