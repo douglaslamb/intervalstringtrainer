@@ -2,6 +2,8 @@ import mido
 from mido import Message
 import random
 import time
+import csv
+import os
 import kissearutil
 
 class StringPlayer:
@@ -17,11 +19,21 @@ class StringPlayer:
         self.absNoteTwo = None
         self.absNoteThree = None
         self.promptText = "Enter intervals separated by one space."
+        self.userMidiIntervals = []
+
+        intervalsFile = os.path.expanduser(raw_input('Enter path of intervals csv file.\n'))
+        # csv import currently does no checks for invalid input
+        # the first and only row must be comma separated interval strings (e.g., P5) with no whitespace
+        with open(intervalsFile) as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=',')
+            userIntervalStrings = csv_reader.next()
+            for item in userIntervalStrings:
+                self.userMidiIntervals.append(kissearutil.diatonicToMidi(item))
 
     def chooseNotes(self):
         #randomly choose intervals and notes
-        intervalOne = random.randint(1, 12) * random.choice([-1, 1])
-        intervalTwo = random.randint(1, 12) * random.choice([-1, 1])
+        intervalOne = random.choice(self.userMidiIntervals) * random.choice([-1, 1])
+        intervalTwo = random.choice(self.userMidiIntervals) * random.choice([-1, 1])
         relNoteOne = 0
         relNoteTwo = relNoteOne + intervalOne
         relNoteThree = relNoteTwo + intervalTwo
