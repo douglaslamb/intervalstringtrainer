@@ -85,9 +85,9 @@ while administrator == None:
     if activityNumber == `1`:
         administrator = trainer.Trainer(stringPlayer.StringPlayer(lowerMidiLimit, upperMidiLimit, outPort))
     elif activityNumber == `2`:
-        administrator = chordTrainer.ChordTrainer()
+        administrator = trainer.Trainer(chordPlayer.ChordPlayer(lowerMidiLimit, upperMidiLimit, outPort))
     elif activityNumber == `3`:
-        administrator = intervalTrainer.IntervalTrainer()
+        administrator = trainer.Trainer(intervalPlayer.IntervalPlayer(lowerMidiLimit, upperMidiLimit, outPort))
     elif activityNumber == `4`:
         # long interval test
         administrator = tester.Tester(intervalGenerator.IntervalGenerator)
