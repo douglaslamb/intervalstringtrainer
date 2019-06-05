@@ -10,7 +10,7 @@ class Trainer:
     def run(self):
         quit = False
         while not quit:
-            correctAnswer = player.chooseNotes()
+            correctAnswer = self.player.chooseNotes()
 
             playNotes = True
             done = False
@@ -18,10 +18,10 @@ class Trainer:
             # question loop
             while not done:
                 if playNotes:
-                    player.playNotes()
+                    self.player.playNotes()
                     playNotes = False
 
-                rawAnswer = raw_input(player.promptText + ' blank - repeat, n - next question, q - quit: ')
+                rawAnswer = raw_input(self.player.promptText + ' blank - repeat, n - next question, q - quit: ')
 
                 # check answers
                 if rawAnswer == '':
@@ -39,5 +39,5 @@ class Trainer:
                         for i, item in enumerate(responses):
                             if item == correctAnswer[i]:
                                 print('Correct!')
-                            else
-                                print('Incorrect!')
+                            else:
+                                print('Incorrect.')

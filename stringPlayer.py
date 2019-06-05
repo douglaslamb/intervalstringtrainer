@@ -46,14 +46,14 @@ class StringPlayer:
         msgThree = Message('note_on', note=self.absNoteThree, velocity=127)
 
         #play notes
-        self.port.send(msgOne)
+        self.outPort.send(msgOne)
         time.sleep(self.noteDur)
-        self.port.send(Message('note_off', note=self.absNoteOne))
+        self.outPort.send(Message('note_off', note=self.absNoteOne))
 
-        self.port.send(msgTwo)
+        self.outPort.send(msgTwo)
         time.sleep(self.noteDur)
-        self.port.send(Message('note_off', note=self.absNoteTwo))
+        self.outPort.send(Message('note_off', note=self.absNoteTwo))
 
-        self.port.send(msgThree)
+        self.outPort.send(msgThree)
         time.sleep(self.noteDur)
-        port.send(Message('note_off', note=self.absNoteThree))
+        self.outPort.send(Message('note_off', note=self.absNoteThree))
