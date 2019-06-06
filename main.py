@@ -79,7 +79,7 @@ administrator = None
 
 # Start Menu
 while administrator == None:
-    activityNumber = raw_input('Choose activity:\n1. Interval String Identification\n2. Chord Identification\n3. Interval Identification\n')
+    activityNumber = raw_input('Choose activity:\n1. Interval String Identification\n2. Chord Identification\n3. Interval Identification\n4. Interval Test\n')
 
     # assign program module depending on user input
     if activityNumber == `1`:
@@ -90,7 +90,7 @@ while administrator == None:
         administrator = trainer.Trainer(intervalPlayer.IntervalPlayer(lowerMidiLimit, upperMidiLimit, outPort))
     elif activityNumber == `4`:
         # long interval test
-        administrator = tester.Tester(intervalGenerator.IntervalGenerator)
+        administrator = tester.Tester(intervalPlayer.IntervalPlayer(lowerMidiLimit, upperMidiLimit, outPort))
     else:
         print('Invalid entry.')
 

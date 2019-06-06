@@ -1,11 +1,16 @@
-class Tester:
+import time
 
-    def __init__(self, generator):
-        self.generator = generator
+class Tester:
+    # runs tests with multiple questions
+
+    def __init__(self, player):
+        self.player = player
         # default values
         self.numQuestions = 10 
-        self.numRepeats = 3
+        self.numPlays = 3
         self.speed= 1
+        self.repeatDelta = 3 
+        self.nextQuestionDelta = 4
         self.answerStrings = []
         
         try:
@@ -13,21 +18,37 @@ class Tester:
         except ValueError:
             pass
         else:
-            self.numQuestions = numQuestions
+            if numQuestions > 0:
+                self.numQuestions = numQuestions
 
         try:
-            numRepeats = int(raw_input('Enter number of repeats per question.\n'))
+            numPlays = int(raw_input('Enter number of times to play each question.\n'))
         except ValueError:
             pass
         else:
-            self.numRepeats = numRepeats
+            if numPlays > 0:
+                self.numPlays = numPlays
 
         try:
             speed = int(raw_input('Enter speed. Default: 1.\n'))
         except ValueError:
             pass
         else:
-            self.speed = speed
+            if speed > 0:
+                self.speed = speed
 
+        print('Questions: ' + str(self.numQuestions))
+        print('Plays per question: ' + str(self.numPlays))
+        print('Speed: ' + str(self.speed))
+        print('\n')
 
-
+    def run(self):
+        for i in range(self.numQuestions):
+            self.answerStrings.append(self.player.chooseNotes()[0])
+            for j in range(self.numPlays):
+                self.player.playNotes()
+                time.sleep(self.repeatDelta * self.speed)
+            time.sleep(self.nextQuestionDelta * self.speed)
+        print('Answers:')
+        for i, item in enumerate(self.answerStrings):
+            print(str(i + 1) + '. ' + item)
