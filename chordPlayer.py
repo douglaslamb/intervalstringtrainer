@@ -4,10 +4,14 @@ import random
 import time
 import csv
 import os
+import kissearutil
 
 class ChordPlayer:
 
-    def __init__(self):
+    def __init__(self, lowerMidiLimit, upperMidiLimit, outPort):
+        self.lowerMidiLimit = lowerMidiLimit
+        self.upperMidiLimit = upperMidiLimit
+        self.outPort = outPort
         self.minDur = 1 
         self.maxDur = 3 
         self.dur = None
@@ -30,7 +34,7 @@ class ChordPlayer:
                         chord.append(int(item))
                 self.chordsArr.append((answerString, chord))
 
-    def chooseNotes(self, lowerMidiLimit, upperMidiLimit):
+    def chooseNotes(self):
         # randomly choose and save a chord from the arr
         self.currChord = random.choice(self.chordsArr)
         chordIntervals = self.currChord[1]
@@ -40,12 +44,16 @@ class ChordPlayer:
             intervalRange += interval
 
         # randomly choose and save the low note
-        self.currLowNote = random.randint(lowerMidiLimit, upperMidiLimit - intervalRange)
+        self.currLowNote = random.randint(self.lowerMidiLimit, self.upperMidiLimit - intervalRange)
 
         # randomly choose duration
         self.dur = random.uniform(self.minDur, self.maxDur)
 
-    def playNotes(self, port):
+        # return answer string in arr
+        answerString = self.currChord[0]
+        return [answerString]
+
+    def playNotes(self):
         # generate midi note values
         midiNotes = [self.currLowNote]
         chordIntervals = self.currChord[1]
@@ -55,21 +63,10 @@ class ChordPlayer:
 
         # play notes
         for midiNote in midiNotes:
-            port.send(Message('note_on', note=midiNote, velocity=127))
+            self.outPort.send(Message('note_on', note=midiNote, velocity=127))
 
         time.sleep(self.dur)
 
         # end notes
         for midiNote in midiNotes:
-            port.send(Message('note_off', note=midiNote))
-
-    def checkAnswer(self, responses):
-        if len(responses) != 1:
-            print('Invalid entry.')
-        else:
-            response = responses[0]
-            correctAnswer = self.currChord[0]
-            if response != correctAnswer:
-                print('Incorrect.')
-            else:
-                print('Correct!')
+            self.outPort.send(Message('note_off', note=midiNote))
