@@ -74,24 +74,32 @@ else:
 
 print('Midi range is ' + str(lowerMidiLimit) + ' - ' + str(upperMidiLimit) + '.\n')
 
-quit = False
-administrator = None
-
 # Start Menu
-while administrator == None:
-    activityNumber = raw_input('Choose activity:\n1. Interval String Identification\n2. Chord Identification\n3. Interval Identification\n4. Interval Test\n')
+playerClass = None
+while playerClass == None:
+    activityNumber = raw_input('Choose thing to work on:\n1. String Identification\n2. Chord Identification\n3. Interval Identification\n')
 
-    # assign program module depending on user input
+    # assign player depending on user input
     if activityNumber == `1`:
-        administrator = trainer.Trainer(stringPlayer.StringPlayer(lowerMidiLimit, upperMidiLimit, outPort))
+        playerClass = stringPlayer.StringPlayer
     elif activityNumber == `2`:
-        administrator = trainer.Trainer(chordPlayer.ChordPlayer(lowerMidiLimit, upperMidiLimit, outPort))
+        playerClass = chordPlayer.ChordPlayer
     elif activityNumber == `3`:
-        administrator = trainer.Trainer(intervalPlayer.IntervalPlayer(lowerMidiLimit, upperMidiLimit, outPort))
-    elif activityNumber == `4`:
-        # long interval test
-        administrator = tester.Tester(intervalPlayer.IntervalPlayer(lowerMidiLimit, upperMidiLimit, outPort))
+        playerClass = intervalPlayer.IntervalPlayer
     else:
         print('Invalid entry.')
 
+administratorClass = None
+while administratorClass == None:
+    activityNumber = raw_input('Choose format:\n1. Individual questions with immmediate answer prompt\n2. Multiple question quiz with answers displayed at end\n')
+
+    # assign administrator depending on user input
+    if activityNumber == `1`:
+        administratorClass = trainer.Trainer
+    elif activityNumber == `2`:
+        administratorClass = tester.Tester
+    else:
+        print('Invalid entry.')
+
+administrator = administratorClass(playerClass(lowerMidiLimit, upperMidiLimit, outPort))
 administrator.run()

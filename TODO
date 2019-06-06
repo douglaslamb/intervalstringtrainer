@@ -1,3 +1,3 @@
-TODO Modify activity selection to be hierarchical, so you choose training or test and so on. 20190605
+DONE Modify activity selection to be hierarchical, so you choose training or test and so on. 20190605
 DONE Create tester class to run tests with multiple questions. 20190605
 DONE Next change all modules to use the functions in kissearutil where appropriate. 20190531
