@@ -40,6 +40,7 @@ class Tester:
         print('Questions: ' + str(self.numQuestions))
         print('Plays per question: ' + str(self.numPlays))
         print('Speed: ' + str(self.speed))
+        print('\n')
 
     def run(self):
         for i in range(self.numQuestions):
