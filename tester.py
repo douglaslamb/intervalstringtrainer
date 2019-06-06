@@ -40,15 +40,18 @@ class Tester:
         print('Questions: ' + str(self.numQuestions))
         print('Plays per question: ' + str(self.numPlays))
         print('Speed: ' + str(self.speed))
-        print('\n')
 
     def run(self):
         for i in range(self.numQuestions):
-            self.answerStrings.append(self.player.chooseNotes()[0])
+            thisAnswers = self.player.chooseNotes()
+            self.answerStrings.append(self.player.chooseNotes())
             for j in range(self.numPlays):
                 self.player.playNotes()
                 time.sleep(self.repeatDelta * self.speed)
             time.sleep(self.nextQuestionDelta * self.speed)
         print('Answers:')
-        for i, item in enumerate(self.answerStrings):
-            print(str(i + 1) + '. ' + item)
+        for i, answer in enumerate(self.answerStrings):
+            printStr = str(i + 1) + '. '
+            for item in answer:
+                printStr = printStr + item + ' '
+            print(printStr)
