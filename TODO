@@ -1,3 +1,4 @@
+TODO Fix the random problem by moving to Python 3 or do something else.
 TODO Enable scaling of the speed because right now it does not work when the user tries to speed it up.
 DONE Modify activity selection to be hierarchical, so you choose training or test and so on. 20190605
 DONE Create tester class to run tests with multiple questions. 20190605
