@@ -11,7 +11,7 @@ o/7 is half diminished
 
 The user may specify any set of chords to use with this program.
 
-If this program does not work, read the instructions again, and make sure you are doing everything correctly. After doing that you can ask the author for help, but he may not have time. If you want help, the best thing to do is to bring your computer to the author while at school or whatever.
+If this program does not work, read the instructions again, and make sure you are doing everything correctly. After doing that, you can ask the author for help, but he may not have time. If you want help, the best thing to do is to bring your computer to the author while at school or whatever.
 
 You first enter a number corresponding to the midi bus to your daw or sound making program. Then you choose an activity. If you choose chord identification you need to specify a chord csv file which contains the chords you wish to be tested on. If you choose interval identification you need to specify an interval csv file. The program comes with two csv files, sevenths.csv, which contains all the seventh chords in all inversions and allints.csv which includes all intervals an octave or smaller.
 
